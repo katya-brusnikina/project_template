@@ -1,1 +1,24 @@
-111
+#! groovy
+
+// Check ubuntu-server properties
+
+properties([disableConcurrentBuilds()])
+pipeline { 
+agent {
+
+label 'master'
+
+}
+options {
+buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+timestamps()
+
+}
+
+stages {
+stage("Preparations") {
+steps {
+sh 'ssh root@ubuntu-server \'hostname\''
+		}
+}
+}
