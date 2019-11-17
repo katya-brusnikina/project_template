@@ -6,12 +6,12 @@ pipeline {
     agent { 
         label 'master'
         }
-    triggers { pollSCM('* * * * *') }
+    //triggers { pollSCM('* * * * *') }
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
     }
-    stages {
+ /*   stages {
         stage("docker login") {
             steps {
                 echo " ============== docker login =================="
@@ -21,22 +21,23 @@ pipeline {
                     """
                 }
             }
-        }
+        }*/
         stage("create docker image") {
             steps {
                 echo " ============== start building image =================="
                 dir ('docker/toolbox') {
-                	sh 'docker build -t semaev/toolbox:latest . '
+                sh 'docker build .'
+                    //	sh 'docker build -t semaev/toolbox:latest . '
                 }
             }
         }
-        stage("docker push") {
+       /* stage("docker push") {
             steps {
                 echo " ============== start pushing image =================="
                 sh '''
                 docker push semaev/toolbox:latest
                 '''
             }
-        }
+        }*/
     }
 }
