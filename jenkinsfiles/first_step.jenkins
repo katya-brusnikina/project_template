@@ -16,5 +16,10 @@ stages {
 			sh 'ssh root@ubuntu-server \'hostname\''
 			}
 		}
+	stage("Second step") {
+		steps {
+			sh 'ssh root@ubuntu-server \'uptime\''
+			}
+		}
 	}
 }
